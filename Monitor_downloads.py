@@ -2,6 +2,7 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import subprocess
+import os
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -23,6 +24,6 @@ def start_watchdog(path):
 
     observer.join()
 
-if __name__ == "__main__":
-    download_folder = r'C:\Users\simob\Downloads'
-    start_watchdog(download_folder)
+user_home = os.path.expanduser("~")
+download_folder = os.path.join(user_home, "Downloads")
+start_watchdog(download_folder)
