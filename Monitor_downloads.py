@@ -7,8 +7,7 @@ import os
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         print(f"New file created: {event.src_path}")
-        # Run your Python script here
-        subprocess.run(["python", "Interface.py"])
+        subprocess.run(["python", os.path.join(os.path.dirname(__file__), "Interface.py")])
 
 def start_watchdog(path):
     event_handler = MyHandler()
@@ -24,6 +23,7 @@ def start_watchdog(path):
 
     observer.join()
 
-user_home = os.path.expanduser("~")
-download_folder = os.path.join(user_home, "Downloads")
-start_watchdog(download_folder)
+if __name__ == "__main__":
+    user_home = os.path.expanduser("~")
+    download_folder = os.path.join(user_home, "Downloads")
+    start_watchdog(download_folder)
