@@ -1,12 +1,14 @@
 import shutil
 import os
 import sys
-def logic(link, prev_paths):
-    user_home = os.path.expanduser("~")
+def logic(link, prev_paths, script_dir):
+
     if link not in prev_paths:
-        with open("paths.txt", "a") as file:
+        paths_file = os.path.join(script_dir, "paths.txt")
+        with open(paths_file, "a") as file:
             file.write(link + "\n")
     
+    user_home = os.path.expanduser("~") 
     downloads_path = os.path.join(user_home, "Downloads")
     downloads = os.listdir(downloads_path)
 
